@@ -1,32 +1,12 @@
 {
-  "pixel_simulator": [
-    {
-      "platform": "ANDROID",
-      "location": "local",
-      "device_name": "emulator-5554",
-      "platform_name": "Android",
-      "platform_version": "11.0",
-      "udid": "emulator-5554",
-      "avd": "Pixel_4_API_30"
-    }
-  ],
-  "iphone_simulator": [
-    {
-      "platform": "IOS",
-      "location": "local",
-      "device_name": "iphone",
-      "platform_version": "14.5",
-      "udid": "BDB15C7E-88F0-4684-A46D-09D261CE38A7"
-    }
-  ],
   "chrome_web_local": [
     {
       "platform": "WEB",
       "location": "local",
       "browser": "chrome",
-      "chrome_options": [
+      "browser_options": [
         "disable-infobars",
-        "--start-fullscreen"
+        "--start-maximized"
       ],
       "headless": "false"
     }
@@ -36,56 +16,10 @@
       "platform": "WEB",
       "location": "local",
       "browser": "chrome",
-      "chrome_options": [
+      "browser_options": [
         "--headless",
         "--window-size=1920,1200"
       ]
-    }
-  ],
-  "bs_1920x1080_chrome_web": [
-    {
-      "platform": "WEB",
-      "location": "browserstack",
-      "browser": "chrome",
-      "resolution": "1920x1080"
-    }
-  ],
-  "bs_1920x1080_safari_web": [
-    {
-      "platform": "WEB",
-      "location": "browserstack",
-      "browser": "Safari",
-      "resolution": "1920x1080"
-    }
-  ],
-  "bs_1280x800_chrome_web": [
-    {
-      "platform": "WEB",
-      "location": "browserstack",
-      "browser": "Chrome",
-      "resolution": "1280x800"
-    }
-  ],
-  "bs_iphone12ProMax_V145_ios": [
-    {
-      "platform": "IOS",
-      "location": "browserstack",
-      "device": "iPhone 12 Pro Max",
-      "version": "14.3"
-    }
-  ],
-  "bs_iphone11Pro_V15_ios": [
-    {
-      "platform": "IOS",
-      "location": "browserstack",
-      "device": "iPhone 11 Pro",
-      "version": "15.0"
-    }
-  ],
-  "bs_android": [
-    {
-      "platform": "ANDROID",
-      "location": "browserstack"
     }
   ]
 }

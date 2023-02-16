@@ -3,9 +3,14 @@ package com.test.bdd.touchActions.web;
 import com.test.bdd.drivers.CustomWebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class actionMethodsWeb {
     public static WebDriver driver = CustomWebDriver.driver;
+    public static WebDriverWait wait = new WebDriverWait(driver, 5);
+
+    private static final JavascriptExecutor js = (JavascriptExecutor) driver;
 
     public static void openPage(String pageUrl) {
         driver.get(pageUrl);
@@ -24,7 +29,6 @@ public class actionMethodsWeb {
 
 
     public static void acceptCookies() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector('bpc-cookie-banner').shadowRoot.querySelector('.bpc-cookie-accept-button').click()");
     }
 
@@ -45,9 +49,24 @@ public class actionMethodsWeb {
     }
 
     public static void scrollTo(WebElement element) {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element);
-        actions.perform();
+        js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public static void waitForElementToBeVisible(By by) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    public static void waitForElementToBeVisible(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static WebElement waitForElementToBeVisible(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 }

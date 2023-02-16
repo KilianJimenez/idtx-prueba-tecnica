@@ -1,18 +1,24 @@
 package com.test.bdd.utils;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
     public static final Logger logger = LoggerFactory.getLogger(Utils.class.getName());
+    private static final String SCREENSHOT_LOCATION = "src/test/resources/screenshots";
 
     public static String getCurrentDateISO() {
         Date date = new Date(System.currentTimeMillis());
@@ -47,5 +53,19 @@ public class Utils {
         }
 
         return result.get(0);
+    }
+
+    public static void logWebScreenShot(String stepName, WebDriver driver) {
+        String filename = UUID.randomUUID().toString();
+        logger.info(filename + " : " + stepName);
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileChannel srcChannel = new FileInputStream(src).getChannel();
+            File dst = new File(SCREENSHOT_LOCATION, filename + ".png");
+            FileChannel dstChannel = new FileOutputStream(dst).getChannel();
+            dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
