@@ -7,6 +7,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriverException;
 
+import java.util.List;
+
 import static com.test.bdd.utils.Utils.logWebScreenShot;
 
 public class ScenarioHooks {
@@ -39,10 +41,13 @@ public class ScenarioHooks {
 
     @After(order = 3)
     public void embedScreenshotOnFailure(Scenario scenario) {
-        try {
-            logWebScreenShot("SnapShot for failed scenario: " + scenario.getName(), CustomWebDriver.driver);
-        } catch (WebDriverException wde) {
-            System.err.println(wde.getMessage());
+        List<String> scenarioTags = (List<String>) scenario.getSourceTagNames();
+        if (scenarioTags.contains("@searchWiki")) {
+            try {
+                logWebScreenShot("Snapshot of scenario: " + scenario.getName(), CustomWebDriver.driver);
+            } catch (WebDriverException wde) {
+                System.err.println(wde.getMessage());
+            }
         }
     }
 

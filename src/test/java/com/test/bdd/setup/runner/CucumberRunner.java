@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         },
         strict = true,
         monochrome = true,
-        tags = "@searchWiki"
+        tags = "@tests"
 )
 
 public class CucumberRunner {

@@ -2,6 +2,7 @@ package com.test.bdd.framework;
 
 import com.test.bdd.drivers.CustomWebDriver;
 import com.test.bdd.setup.properties.ProfileManager;
+import com.test.bdd.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class Framework {
 
 
     public static void init() {
+        Utils.logger.info("Starting Driver");
         customWebDriver = new CustomWebDriver();
     }
 

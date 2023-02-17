@@ -48,7 +48,7 @@ dependencies {
     implementation "io.cucumber:cucumber-java:$cucumber_version"
     implementation "io.cucumber:cucumber-junit:$cucumber_version"
     implementation "io.cucumber:cucumber-picocontainer:$cucumber_version"
-    implementation 'io.rest-assured:rest-assured:3.3.0'
+    implementation 'io.rest-assured:rest-assured:4.3.0'
     implementation "net.serenity-bdd:serenity-core:$serenity_version"
     implementation "net.serenity-bdd:serenity-cucumber4:$serenity_cucumber4_version"
     implementation 'net.serenity-bdd:serenity-junit:2.0.39'

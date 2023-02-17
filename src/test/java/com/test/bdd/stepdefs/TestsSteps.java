@@ -9,13 +9,13 @@ import io.cucumber.java.en.When;
 
 import static com.test.bdd.utils.Utils.logger;
 
-public class SearchTextWikiSteps {
+public class TestsSteps {
 
     private final SearchGoogleFlow searchGoogleFlow;
     private final OpenWikipediaArticleFlow openWikipediaArticleFlow;
     private final CheckFirstYearAutomationFlow checkFirstYearAutomationFlow;
 
-    public SearchTextWikiSteps() {
+    public TestsSteps() {
         this.searchGoogleFlow = new SearchGoogleFlow();
         this.openWikipediaArticleFlow = new OpenWikipediaArticleFlow();
         this.checkFirstYearAutomationFlow = new CheckFirstYearAutomationFlow();
