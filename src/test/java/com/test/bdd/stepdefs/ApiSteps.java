@@ -14,10 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
@@ -75,19 +72,24 @@ public class ApiSteps {
     public void iPrintThePetsWithTheSameName() {
         List<Pet> pets = new ArrayList<>();
         List<Map<String, Object>> jsonResponse = JsonPath.from(response.asString()).get();
-
         for(int i = 0; i < jsonResponse.size(); i++) {
-            Pet pet = new Pet((Integer) jsonResponse.get(i).get("id"), (String) jsonResponse.get(i).get("name"));
+            Pet pet = new Pet(String.valueOf(jsonResponse.get(i).get("id")), (String) jsonResponse.get(i).get("name"));
 
             if(pets.size() > 0){
-                for (Pet petInList : pets) {
-                    if (Objects.equals(petInList.getName(), pet.getName()))
+                for (Iterator<Pet> petIterator = pets.iterator(); petIterator.hasNext();) {
+                    if (Objects.equals(petIterator.next().getName(), pet.getName())) {
                         pets.add(pet);
+                        petIterator.remove();
+                    }
                 }
             } else if( i+1 != jsonResponse.size()) {
-                Pet nextPet = new Pet((Integer) jsonResponse.get(i+1).get("id"), (String) jsonResponse.get(i+1).get("name"));
-                if (Objects.equals(nextPet.getName(), pet.getName()))
-                    pets.add(pet);
+                for (Iterator<Map<String, Object>> iterator = jsonResponse.iterator(); iterator.hasNext(); ) {
+                    Pet nextPet = new Pet(String.valueOf(iterator.next().get("id")), String.valueOf(iterator.next().get("name")));
+                    if (Objects.equals(nextPet.getName(), pet.getName()) && !Objects.equals(nextPet.getId(), pet.getId())) {
+                        pets.add(pet);
+                        iterator.remove();
+                    }
+                }
             }
         }
 
